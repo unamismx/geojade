@@ -4,8 +4,10 @@ Aplicación estática en español para explorar geografía desde Safari en iPad,
 
 ## Funciones
 
-- Banco de 240 preguntas; cada examen toma 10 de cada una de las seis categorías (60 en total).
-- Etapa de mapas: muestra un país resaltado y pregunta a qué continente pertenece.
+- Menú de seis retos independientes de 8 a 10 preguntas: mundo, América, México, océanos, Mundial 2026 y Abu Pregunta.
+- Mapas ampliados por continente y mapa político de México con sus 32 entidades.
+- Reto Mundial 2026 con diez futbolistas y fotografías acreditadas de Wikimedia Commons.
+- Abu Pregunta reúne preguntas deliberadamente más difíciles y una ilustración creada a partir de la fotografía proporcionada por el usuario.
 - Preguntas y opciones aleatorias; ubicación, vecinos, capitales, mundo y razonamiento.
 - Retroalimentación inmediata, revisión de errores y resultado por categoría.
 - Pausa, recuperación de sesión e historial de hasta 20 resultados en el mismo navegador, mediante localStorage.
