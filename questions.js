@@ -2598,5 +2598,605 @@ window.QUESTIONS = [
       "Quintana Roo → Jalisco → Campeche"
     ],
     "explanation": "Yucatán limita con Campeche, y Campeche con Quintana Roo."
+  },
+  {
+    "id": "q201",
+    "category": "mapa",
+    "text": "¿A qué continente pertenece el país marcado?",
+    "answer": "América",
+    "options": [
+      "América",
+      "Europa",
+      "Asia",
+      "África"
+    ],
+    "explanation": "El país resaltado es México y pertenece a América.",
+    "mapCode": "MEX",
+    "country": "México"
+  },
+  {
+    "id": "q202",
+    "category": "mapa",
+    "text": "¿A qué continente pertenece el país marcado?",
+    "answer": "América",
+    "options": [
+      "América",
+      "Europa",
+      "Asia",
+      "África"
+    ],
+    "explanation": "El país resaltado es Canadá y pertenece a América.",
+    "mapCode": "CAN",
+    "country": "Canadá"
+  },
+  {
+    "id": "q203",
+    "category": "mapa",
+    "text": "¿A qué continente pertenece el país marcado?",
+    "answer": "América",
+    "options": [
+      "América",
+      "Europa",
+      "Asia",
+      "África"
+    ],
+    "explanation": "El país resaltado es Estados Unidos y pertenece a América.",
+    "mapCode": "USA",
+    "country": "Estados Unidos"
+  },
+  {
+    "id": "q204",
+    "category": "mapa",
+    "text": "¿A qué continente pertenece el país marcado?",
+    "answer": "América",
+    "options": [
+      "América",
+      "Europa",
+      "Asia",
+      "África"
+    ],
+    "explanation": "El país resaltado es Brasil y pertenece a América.",
+    "mapCode": "BRA",
+    "country": "Brasil"
+  },
+  {
+    "id": "q205",
+    "category": "mapa",
+    "text": "¿A qué continente pertenece el país marcado?",
+    "answer": "América",
+    "options": [
+      "América",
+      "Europa",
+      "Asia",
+      "África"
+    ],
+    "explanation": "El país resaltado es Argentina y pertenece a América.",
+    "mapCode": "ARG",
+    "country": "Argentina"
+  },
+  {
+    "id": "q206",
+    "category": "mapa",
+    "text": "¿A qué continente pertenece el país marcado?",
+    "answer": "América",
+    "options": [
+      "América",
+      "Europa",
+      "Asia",
+      "África"
+    ],
+    "explanation": "El país resaltado es Chile y pertenece a América.",
+    "mapCode": "CHL",
+    "country": "Chile"
+  },
+  {
+    "id": "q207",
+    "category": "mapa",
+    "text": "¿A qué continente pertenece el país marcado?",
+    "answer": "América",
+    "options": [
+      "América",
+      "Europa",
+      "Asia",
+      "África"
+    ],
+    "explanation": "El país resaltado es Colombia y pertenece a América.",
+    "mapCode": "COL",
+    "country": "Colombia"
+  },
+  {
+    "id": "q208",
+    "category": "mapa",
+    "text": "¿A qué continente pertenece el país marcado?",
+    "answer": "América",
+    "options": [
+      "América",
+      "Europa",
+      "Asia",
+      "África"
+    ],
+    "explanation": "El país resaltado es Perú y pertenece a América.",
+    "mapCode": "PER",
+    "country": "Perú"
+  },
+  {
+    "id": "q209",
+    "category": "mapa",
+    "text": "¿A qué continente pertenece el país marcado?",
+    "answer": "Europa",
+    "options": [
+      "Europa",
+      "América",
+      "Asia",
+      "África"
+    ],
+    "explanation": "El país resaltado es España y pertenece a Europa.",
+    "mapCode": "ESP",
+    "country": "España"
+  },
+  {
+    "id": "q210",
+    "category": "mapa",
+    "text": "¿A qué continente pertenece el país marcado?",
+    "answer": "Europa",
+    "options": [
+      "Europa",
+      "América",
+      "Asia",
+      "África"
+    ],
+    "explanation": "El país resaltado es Francia y pertenece a Europa.",
+    "mapCode": "FRA",
+    "country": "Francia"
+  },
+  {
+    "id": "q211",
+    "category": "mapa",
+    "text": "¿A qué continente pertenece el país marcado?",
+    "answer": "Europa",
+    "options": [
+      "Europa",
+      "América",
+      "Asia",
+      "África"
+    ],
+    "explanation": "El país resaltado es Italia y pertenece a Europa.",
+    "mapCode": "ITA",
+    "country": "Italia"
+  },
+  {
+    "id": "q212",
+    "category": "mapa",
+    "text": "¿A qué continente pertenece el país marcado?",
+    "answer": "Europa",
+    "options": [
+      "Europa",
+      "América",
+      "Asia",
+      "África"
+    ],
+    "explanation": "El país resaltado es Alemania y pertenece a Europa.",
+    "mapCode": "DEU",
+    "country": "Alemania"
+  },
+  {
+    "id": "q213",
+    "category": "mapa",
+    "text": "¿A qué continente pertenece el país marcado?",
+    "answer": "Europa",
+    "options": [
+      "Europa",
+      "América",
+      "Asia",
+      "África"
+    ],
+    "explanation": "El país resaltado es Reino Unido y pertenece a Europa.",
+    "mapCode": "GBR",
+    "country": "Reino Unido"
+  },
+  {
+    "id": "q214",
+    "category": "mapa",
+    "text": "¿A qué continente pertenece el país marcado?",
+    "answer": "Europa",
+    "options": [
+      "Europa",
+      "América",
+      "Asia",
+      "África"
+    ],
+    "explanation": "El país resaltado es Noruega y pertenece a Europa.",
+    "mapCode": "NOR",
+    "country": "Noruega"
+  },
+  {
+    "id": "q215",
+    "category": "mapa",
+    "text": "¿A qué continente pertenece el país marcado?",
+    "answer": "Europa",
+    "options": [
+      "Europa",
+      "América",
+      "Asia",
+      "África"
+    ],
+    "explanation": "El país resaltado es Suecia y pertenece a Europa.",
+    "mapCode": "SWE",
+    "country": "Suecia"
+  },
+  {
+    "id": "q216",
+    "category": "mapa",
+    "text": "¿A qué continente pertenece el país marcado?",
+    "answer": "Europa",
+    "options": [
+      "Europa",
+      "América",
+      "Asia",
+      "África"
+    ],
+    "explanation": "El país resaltado es Finlandia y pertenece a Europa.",
+    "mapCode": "FIN",
+    "country": "Finlandia"
+  },
+  {
+    "id": "q217",
+    "category": "mapa",
+    "text": "¿A qué continente pertenece el país marcado?",
+    "answer": "Asia",
+    "options": [
+      "Asia",
+      "América",
+      "Europa",
+      "África"
+    ],
+    "explanation": "El país resaltado es China y pertenece a Asia.",
+    "mapCode": "CHN",
+    "country": "China"
+  },
+  {
+    "id": "q218",
+    "category": "mapa",
+    "text": "¿A qué continente pertenece el país marcado?",
+    "answer": "Asia",
+    "options": [
+      "Asia",
+      "América",
+      "Europa",
+      "África"
+    ],
+    "explanation": "El país resaltado es India y pertenece a Asia.",
+    "mapCode": "IND",
+    "country": "India"
+  },
+  {
+    "id": "q219",
+    "category": "mapa",
+    "text": "¿A qué continente pertenece el país marcado?",
+    "answer": "Asia",
+    "options": [
+      "Asia",
+      "América",
+      "Europa",
+      "África"
+    ],
+    "explanation": "El país resaltado es Japón y pertenece a Asia.",
+    "mapCode": "JPN",
+    "country": "Japón"
+  },
+  {
+    "id": "q220",
+    "category": "mapa",
+    "text": "¿A qué continente pertenece el país marcado?",
+    "answer": "Asia",
+    "options": [
+      "Asia",
+      "América",
+      "Europa",
+      "África"
+    ],
+    "explanation": "El país resaltado es Corea del Sur y pertenece a Asia.",
+    "mapCode": "KOR",
+    "country": "Corea del Sur"
+  },
+  {
+    "id": "q221",
+    "category": "mapa",
+    "text": "¿A qué continente pertenece el país marcado?",
+    "answer": "Asia",
+    "options": [
+      "Asia",
+      "América",
+      "Europa",
+      "África"
+    ],
+    "explanation": "El país resaltado es Vietnam y pertenece a Asia.",
+    "mapCode": "VNM",
+    "country": "Vietnam"
+  },
+  {
+    "id": "q222",
+    "category": "mapa",
+    "text": "¿A qué continente pertenece el país marcado?",
+    "answer": "Asia",
+    "options": [
+      "Asia",
+      "América",
+      "Europa",
+      "África"
+    ],
+    "explanation": "El país resaltado es Tailandia y pertenece a Asia.",
+    "mapCode": "THA",
+    "country": "Tailandia"
+  },
+  {
+    "id": "q223",
+    "category": "mapa",
+    "text": "¿A qué continente pertenece el país marcado?",
+    "answer": "Asia",
+    "options": [
+      "Asia",
+      "América",
+      "Europa",
+      "África"
+    ],
+    "explanation": "El país resaltado es Arabia Saudita y pertenece a Asia.",
+    "mapCode": "SAU",
+    "country": "Arabia Saudita"
+  },
+  {
+    "id": "q224",
+    "category": "mapa",
+    "text": "¿A qué continente pertenece el país marcado?",
+    "answer": "Asia",
+    "options": [
+      "Asia",
+      "América",
+      "Europa",
+      "África"
+    ],
+    "explanation": "El país resaltado es Mongolia y pertenece a Asia.",
+    "mapCode": "MNG",
+    "country": "Mongolia"
+  },
+  {
+    "id": "q225",
+    "category": "mapa",
+    "text": "¿A qué continente pertenece el país marcado?",
+    "answer": "África",
+    "options": [
+      "África",
+      "América",
+      "Europa",
+      "Asia"
+    ],
+    "explanation": "El país resaltado es Egipto y pertenece a África.",
+    "mapCode": "EGY",
+    "country": "Egipto"
+  },
+  {
+    "id": "q226",
+    "category": "mapa",
+    "text": "¿A qué continente pertenece el país marcado?",
+    "answer": "África",
+    "options": [
+      "África",
+      "América",
+      "Europa",
+      "Asia"
+    ],
+    "explanation": "El país resaltado es Marruecos y pertenece a África.",
+    "mapCode": "MAR",
+    "country": "Marruecos"
+  },
+  {
+    "id": "q227",
+    "category": "mapa",
+    "text": "¿A qué continente pertenece el país marcado?",
+    "answer": "África",
+    "options": [
+      "África",
+      "América",
+      "Europa",
+      "Asia"
+    ],
+    "explanation": "El país resaltado es Argelia y pertenece a África.",
+    "mapCode": "DZA",
+    "country": "Argelia"
+  },
+  {
+    "id": "q228",
+    "category": "mapa",
+    "text": "¿A qué continente pertenece el país marcado?",
+    "answer": "África",
+    "options": [
+      "África",
+      "América",
+      "Europa",
+      "Asia"
+    ],
+    "explanation": "El país resaltado es Nigeria y pertenece a África.",
+    "mapCode": "NGA",
+    "country": "Nigeria"
+  },
+  {
+    "id": "q229",
+    "category": "mapa",
+    "text": "¿A qué continente pertenece el país marcado?",
+    "answer": "África",
+    "options": [
+      "África",
+      "América",
+      "Europa",
+      "Asia"
+    ],
+    "explanation": "El país resaltado es Kenia y pertenece a África.",
+    "mapCode": "KEN",
+    "country": "Kenia"
+  },
+  {
+    "id": "q230",
+    "category": "mapa",
+    "text": "¿A qué continente pertenece el país marcado?",
+    "answer": "África",
+    "options": [
+      "África",
+      "América",
+      "Europa",
+      "Asia"
+    ],
+    "explanation": "El país resaltado es Etiopía y pertenece a África.",
+    "mapCode": "ETH",
+    "country": "Etiopía"
+  },
+  {
+    "id": "q231",
+    "category": "mapa",
+    "text": "¿A qué continente pertenece el país marcado?",
+    "answer": "África",
+    "options": [
+      "África",
+      "América",
+      "Europa",
+      "Asia"
+    ],
+    "explanation": "El país resaltado es Sudáfrica y pertenece a África.",
+    "mapCode": "ZAF",
+    "country": "Sudáfrica"
+  },
+  {
+    "id": "q232",
+    "category": "mapa",
+    "text": "¿A qué continente pertenece el país marcado?",
+    "answer": "África",
+    "options": [
+      "África",
+      "América",
+      "Europa",
+      "Asia"
+    ],
+    "explanation": "El país resaltado es Madagascar y pertenece a África.",
+    "mapCode": "MDG",
+    "country": "Madagascar"
+  },
+  {
+    "id": "q233",
+    "category": "mapa",
+    "text": "¿A qué continente pertenece el país marcado?",
+    "answer": "Oceanía",
+    "options": [
+      "Oceanía",
+      "América",
+      "Europa",
+      "Asia"
+    ],
+    "explanation": "El país resaltado es Australia y pertenece a Oceanía.",
+    "mapCode": "AUS",
+    "country": "Australia"
+  },
+  {
+    "id": "q234",
+    "category": "mapa",
+    "text": "¿A qué continente pertenece el país marcado?",
+    "answer": "Oceanía",
+    "options": [
+      "Oceanía",
+      "América",
+      "Europa",
+      "Asia"
+    ],
+    "explanation": "El país resaltado es Nueva Zelanda y pertenece a Oceanía.",
+    "mapCode": "NZL",
+    "country": "Nueva Zelanda"
+  },
+  {
+    "id": "q235",
+    "category": "mapa",
+    "text": "¿A qué continente pertenece el país marcado?",
+    "answer": "Oceanía",
+    "options": [
+      "Oceanía",
+      "América",
+      "Europa",
+      "Asia"
+    ],
+    "explanation": "El país resaltado es Indonesia y pertenece a Oceanía.",
+    "mapCode": "IDN",
+    "country": "Indonesia"
+  },
+  {
+    "id": "q236",
+    "category": "mapa",
+    "text": "¿A qué continente pertenece el país marcado?",
+    "answer": "Oceanía",
+    "options": [
+      "Oceanía",
+      "América",
+      "Europa",
+      "Asia"
+    ],
+    "explanation": "El país resaltado es Papúa Nueva Guinea y pertenece a Oceanía.",
+    "mapCode": "PNG",
+    "country": "Papúa Nueva Guinea"
+  },
+  {
+    "id": "q237",
+    "category": "mapa",
+    "text": "¿A qué continente pertenece el país marcado?",
+    "answer": "Oceanía",
+    "options": [
+      "Oceanía",
+      "América",
+      "Europa",
+      "Asia"
+    ],
+    "explanation": "El país resaltado es Fiyi y pertenece a Oceanía.",
+    "mapCode": "FJI",
+    "country": "Fiyi"
+  },
+  {
+    "id": "q238",
+    "category": "mapa",
+    "text": "¿A qué continente pertenece el país marcado?",
+    "answer": "Oceanía",
+    "options": [
+      "Oceanía",
+      "América",
+      "Europa",
+      "Asia"
+    ],
+    "explanation": "El país resaltado es Islas Salomón y pertenece a Oceanía.",
+    "mapCode": "SLB",
+    "country": "Islas Salomón"
+  },
+  {
+    "id": "q239",
+    "category": "mapa",
+    "text": "¿A qué continente pertenece el país marcado?",
+    "answer": "Oceanía",
+    "options": [
+      "Oceanía",
+      "América",
+      "Europa",
+      "Asia"
+    ],
+    "explanation": "El país resaltado es Vanuatu y pertenece a Oceanía.",
+    "mapCode": "VUT",
+    "country": "Vanuatu"
+  },
+  {
+    "id": "q240",
+    "category": "mapa",
+    "text": "¿A qué continente pertenece el país marcado?",
+    "answer": "Oceanía",
+    "options": [
+      "Oceanía",
+      "América",
+      "Europa",
+      "Asia"
+    ],
+    "explanation": "El país resaltado es Nueva Caledonia y pertenece a Oceanía.",
+    "mapCode": "NCL",
+    "country": "Nueva Caledonia"
   }
 ];

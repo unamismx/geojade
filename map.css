@@ -1,0 +1,53 @@
+.map-wrap {
+  margin: -8px 0 24px;
+  padding: 12px;
+  border: 1px solid #d6ddcc;
+  border-radius: 18px;
+  background: #e9f2ed;
+}
+
+.world-map {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2 / 1;
+}
+
+.country {
+  fill: #c6d5c7;
+  stroke: #f8f6ed;
+  stroke-width: .7;
+  vector-effect: non-scaling-stroke;
+}
+
+.country.target {
+  fill: #dc6038;
+  stroke: #983a24;
+  stroke-width: 1.4;
+}
+
+.locator {
+  fill: none;
+  stroke: #983a24;
+  stroke-width: 3;
+  vector-effect: non-scaling-stroke;
+}
+
+.map-key {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 4px 0 0;
+  color: #566960;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.map-key::before {
+  content: '';
+  width: 13px;
+  height: 13px;
+  border-radius: 3px;
+  background: #dc6038;
+}

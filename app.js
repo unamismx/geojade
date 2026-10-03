@@ -1,37 +1,55 @@
 (() => {
-'use strict';
-const app=document.querySelector('#app');
-const names={mexico:'México · Ubicación',vecinos:'Estados vecinos',capitales:'Capitales',mundo:'Países y continentes',reto:'Razonamiento'};
-const order=Object.keys(names), key='geojade-session-v1',historyKey='geojade-history-v1';
-let session=null, storageOK=true;
-function read(k,fallback){try{return JSON.parse(localStorage.getItem(k))||fallback}catch{return fallback}}
-function write(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch{storageOK=false}}
-function erase(k){try{localStorage.removeItem(k)}catch{storageOK=false}}
-function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
-function escape(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function bind(id,fn){document.getElementById(id)?.addEventListener('click',fn)}
-function notice(){return storageOK?'':'<p class="notice">Este navegador no permite guardar el avance. Puedes completar el reto mientras mantengas esta página abierta.</p>'}
-function valid(s){return s&&Array.isArray(s.questions)&&s.questions.length===50&&Number.isInteger(s.index)&&s.index>=0&&s.index<50&&Array.isArray(s.answers)&&s.answers.length>=s.index&&s.questions.every(q=>q&&q.options?.length===4&&q.options.includes(q.answer)&&names[q.category])}
-function home(){
- const saved=read(key,null);if(valid(saved))session=saved;else session=null;
- const history=read(historyKey,[]);const records=Array.isArray(history)?history:[];
- app.innerHTML=`<section class="hero"><div><p class="eyebrow">TU PRÓXIMA GRAN EXPEDICIÓN</p><h1>Hola, Jade.<br>¿Qué tan lejos<br>llega tu <em>mapa mental?</em></h1><p class="lead">De los vecinos de Yucatán a los países del mundo. Piensa, elige y descubre algo nuevo en cada pregunta.</p><div class="actions">${session?'<button class="primary" id="resume">Continuar mi reto</button><button class="quiet" id="new">Empezar otro</button>':'<button class="primary" id="new">Comenzar la expedición →</button>'}</div><p class="muted">Una pregunta a la vez. Puedes hacer una pausa cuando quieras.</p></div><div class="art"><svg class="globe" viewBox="0 0 360 360" aria-label="Globo ilustrado" role="img"><circle cx="180" cy="180" r="164" fill="#e3e9db"/><g fill="none" stroke="#95b5a0" stroke-width="2"><circle cx="180" cy="180" r="125"/><ellipse cx="180" cy="180" rx="65" ry="125"/><ellipse cx="180" cy="180" rx="125" ry="45"/><path d="M55 180h250M180 55v250"/></g><path d="M90 95l45-12 23 30-16 26 19 26-18 20-29-10-18-37zM148 190l37 15 3 34-25 39-17-43zM205 100l40-4 35 42-19 19-32-10-27 31-21-22 20-23zM209 185l36 4 9 33-23 39-22-22-11-34z" fill="#456d50"/><circle cx="118" cy="166" r="8" fill="#dc6038"/><circle cx="118" cy="166" r="16" fill="none" stroke="#dc6038" stroke-width="2"/><path d="M126 154Q180 57 259 148" fill="none" stroke="#dc6038" stroke-width="3" stroke-dasharray="5 7"/><text x="180" y="334" text-anchor="middle" fill="#456d50" font-size="11" letter-spacing="3">EL MUNDO TE ESPERA</text></svg></div></section><section class="facts"><div class="fact"><strong>50</strong><span>preguntas por expedición</span></div><div class="fact"><strong>5</strong><span>territorios por explorar</span></div><div class="fact"><strong>200</strong><span>preguntas en el banco</span></div></section>${notice()}<p class="muted">Aquí usamos América del Norte y América del Sur como regiones de América. El reto empieza con ubicación y termina con deducción; las preguntas no se adaptan automáticamente.</p>${records.length?`<section class="panel history"><h2>Mi bitácora</h2>${records.slice(0,5).map(r=>`<div class="row"><span>${escape(r.date)}</span><strong>${Number(r.score)} / 50</strong></div>`).join('')}</section>`:''}`;
- bind('resume',render);bind('new',()=>{if(session){confirmNew()}else start()});
-}
-function confirmNew(){const d=document.createElement('dialog');d.innerHTML='<h2>¿Una nueva expedición?</h2><p>Se reemplazará el reto que tienes a medias. Tus resultados terminados seguirán en la bitácora.</p><div class="actions"><button class="quiet" id="cancel">Seguir con mi reto</button><button class="primary" id="confirm">Empezar otro</button></div>';document.body.appendChild(d);d.showModal();bind('cancel',()=>{d.close();d.remove()});bind('confirm',()=>{d.close();d.remove();start()});d.addEventListener('cancel',()=>d.remove())}
-function start(){session={id:Date.now()+'-'+Math.random().toString(36).slice(2),questions:order.flatMap(c=>shuffle(window.QUESTIONS.filter(q=>q.category===c)).slice(0,10).map(q=>({...q,options:shuffle(q.options)}))),index:0,answers:[]};write(key,session);render()}
-function score(){return session.answers.filter(a=>a.correct).length}
-function render(){const q=session.questions[session.index],a=session.answers[session.index];
- app.innerHTML=`<div class="topline"><span class="badge">${names[q.category]}</span><span>Pregunta <strong>${session.index+1}</strong> de 50 · <strong>${score()}</strong> puntos</span><button class="quiet" id="pause">Pausar</button></div><div class="progress" role="progressbar" aria-label="Preguntas contestadas" aria-valuemin="0" aria-valuemax="50" aria-valuenow="${session.answers.length}"><div style="width:${session.answers.length*2}%"></div></div><section class="panel"><p class="eyebrow">ETAPA ${Math.floor(session.index/10)+1} DE 5</p><h1 class="question" id="question" tabindex="-1">${escape(q.text)}</h1><div class="choices">${q.options.map((o,i)=>`<button id="choice${i}" class="choice ${a?(o===q.answer?'correct':o===a.selected?'wrong':''):''}" ${a?'disabled':''}><span class="letter">${'ABCD'[i]}</span><span>${escape(o)}${a&&o===q.answer?' · Correcta':a&&o===a.selected?' · Tu respuesta':''}</span></button>`).join('')}</div><div id="feedback" aria-live="polite">${a?feedback(q,a):''}</div></section>${notice()}`;
- q.options.forEach((o,i)=>bind('choice'+i,()=>choose(o)));bind('pause',home);bind('next',next);document.getElementById('question').focus();
-}
-function feedback(q,a){return `<div class="feedback ${a.correct?'':'error'}"><strong>${a.correct?'¡Correcto!':'Esta vez fue otra respuesta.'}</strong><p>${a.correct?'':`La respuesta es <b>${escape(q.answer)}</b>. `}${escape(q.explanation)}</p></div><button class="primary next" id="next">${session.index===49?'Ver mi resultado':'Siguiente pregunta'} →</button>`}
-function choose(selected){if(session.answers[session.index])return;const q=session.questions[session.index];session.answers.push({selected,correct:selected===q.answer});write(key,session);render();document.getElementById('next').focus()}
-function next(){if(!session.answers[session.index])return;if(session.index===49){finish();return}session.index++;write(key,session);render()}
-function finish(){const n=score();let history=read(historyKey,[]);if(!Array.isArray(history))history=[];if(!history.some(r=>r.id===session.id)){history.unshift({id:session.id,date:new Date().toLocaleDateString('es-MX'),score:n});write(historyKey,history.slice(0,20))}erase(key);
- const stats=order.map(c=>({name:names[c],score:session.questions.reduce((s,q,i)=>s+(q.category===c&&session.answers[i].correct?1:0),0)}));const missed=session.questions.map((q,i)=>({q,a:session.answers[i]})).filter(x=>!x.a.correct);
- app.innerHTML=`<section class="panel"><p class="eyebrow">EXPEDICIÓN COMPLETADA</p><h1 class="question">${n>=45?'¡Tu mapa mental llega muy lejos!':n>=30?'¡Has descubierto mucho!':'Cada intento abre nuevos caminos.'}</h1><div class="bigscore">${n}<span> / 50</span></div><p>Acertaste el ${n*2}% de las preguntas. Aquí está tu recorrido:</p>${stats.map(s=>`<div class="row"><span>${s.name}</span><strong>${s.score} / 10</strong></div>`).join('')}<p class="muted">${missed.length?'Puedes repasar las respuestas y volver a intentarlo.':'¡Completaste todas las etapas sin errores!'}</p><div class="actions"><button class="primary" id="again">Nueva expedición</button><button class="quiet" id="home">Volver al inicio</button></div>${notice()}</section>${missed.length?`<details class="panel review"><summary>Explorar mis ${missed.length} respuestas para repasar</summary>${missed.map(({q,a})=>`<article><strong>${escape(q.text)}</strong><p>Elegiste: ${escape(a.selected)}<br>Respuesta: <b>${escape(q.answer)}</b></p><p class="muted">${escape(q.explanation)}</p></article>`).join('')}</details>`:''}`;
- bind('again',start);bind('home',home);window.scrollTo(0,0);
-}
-home();
+  'use strict';
+  const app = document.querySelector('#app');
+  const names = { mexico:'México · Ubicación', vecinos:'Estados vecinos', capitales:'Capitales', mundo:'Países y continentes', reto:'Razonamiento', mapa:'Mapa del mundo' };
+  const order = Object.keys(names), total = order.length * 10;
+  const key = 'geojade-session-v2', historyKey = 'geojade-history-v1';
+  let session = null, storageOK = true;
+
+  function read(k, fallback) { try { return JSON.parse(localStorage.getItem(k)) || fallback; } catch { return fallback; } }
+  function write(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch { storageOK = false; } }
+  function erase(k) { try { localStorage.removeItem(k); } catch { storageOK = false; } }
+  function shuffle(arr) { const a=[...arr]; for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+  function escape(s) { return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+  function bind(id, fn) { document.getElementById(id)?.addEventListener('click', fn); }
+  function notice() { return storageOK ? '' : '<p class="notice">Este navegador no permite guardar el avance. Puedes completar el reto mientras mantengas esta página abierta.</p>'; }
+  function valid(s) { return s && Array.isArray(s.questions) && s.questions.length===total && Number.isInteger(s.index) && s.index>=0 && s.index<total && Array.isArray(s.answers) && s.answers.length>=s.index && s.questions.every(q=>q && q.options?.length===4 && q.options.includes(q.answer) && names[q.category]); }
+
+  function home() {
+    session = valid(read(key,null)) ? read(key,null) : null;
+    const history=read(historyKey,[]), records=Array.isArray(history)?history:[];
+    app.innerHTML=`<section class="hero"><div><p class="eyebrow">TU PRÓXIMA GRAN EXPEDICIÓN</p><h1>Hola, Jade.<br>¿Qué tan lejos<br>llega tu <em>mapa mental?</em></h1><p class="lead">De los vecinos de Yucatán a los países del mundo. Piensa, elige y descubre algo nuevo en cada pregunta.</p><div class="actions">${session?'<button class="primary" id="resume">Continuar mi reto</button><button class="quiet" id="new">Empezar otro</button>':'<button class="primary" id="new">Comenzar la expedición →</button>'}</div><p class="muted">Una pregunta a la vez. Puedes hacer una pausa cuando quieras.</p></div><div class="art"><svg class="globe" viewBox="0 0 360 360" aria-label="Globo ilustrado" role="img"><circle cx="180" cy="180" r="164" fill="#e3e9db"/><g fill="none" stroke="#95b5a0" stroke-width="2"><circle cx="180" cy="180" r="125"/><ellipse cx="180" cy="180" rx="65" ry="125"/><ellipse cx="180" cy="180" rx="125" ry="45"/><path d="M55 180h250M180 55v250"/></g><path d="M90 95l45-12 23 30-16 26 19 26-18 20-29-10-18-37zM148 190l37 15 3 34-25 39-17-43zM205 100l40-4 35 42-19 19-32-10-27 31-21-22 20-23zM209 185l36 4 9 33-23 39-22-22-11-34z" fill="#456d50"/><circle cx="118" cy="166" r="8" fill="#dc6038"/><circle cx="118" cy="166" r="16" fill="none" stroke="#dc6038" stroke-width="2"/><path d="M126 154Q180 57 259 148" fill="none" stroke="#dc6038" stroke-width="3" stroke-dasharray="5 7"/><text x="180" y="334" text-anchor="middle" fill="#456d50" font-size="11" letter-spacing="3">EL MUNDO TE ESPERA</text></svg></div></section><section class="facts"><div class="fact"><strong>${total}</strong><span>preguntas por expedición</span></div><div class="fact"><strong>${order.length}</strong><span>territorios por explorar</span></div><div class="fact"><strong>${window.QUESTIONS.length}</strong><span>preguntas en el banco</span></div></section>${notice()}<p class="muted">En los mapas usamos cinco continentes habitados: América, Europa, Asia, África y Oceanía. Las preguntas se eligen al azar.</p>${records.length?`<section class="panel history"><h2>Mi bitácora</h2>${records.slice(0,5).map(r=>`<div class="row"><span>${escape(r.date)}</span><strong>${Number(r.score)} / ${Number(r.total)||50}</strong></div>`).join('')}</section>`:''}`;
+    bind('resume',render); bind('new',()=>session?confirmNew():start());
+  }
+  function confirmNew(){ const d=document.createElement('dialog'); d.innerHTML='<h2>¿Una nueva expedición?</h2><p>Se reemplazará el reto que tienes a medias. Tus resultados terminados seguirán en la bitácora.</p><div class="actions"><button class="quiet" id="cancel">Seguir con mi reto</button><button class="primary" id="confirm">Empezar otro</button></div>'; document.body.appendChild(d); d.showModal(); bind('cancel',()=>{d.close();d.remove()}); bind('confirm',()=>{d.close();d.remove();start()}); d.addEventListener('cancel',()=>d.remove()); }
+  function start(){ session={id:Date.now()+'-'+Math.random().toString(36).slice(2),questions:order.flatMap(c=>shuffle(window.QUESTIONS.filter(q=>q.category===c)).slice(0,10).map(q=>({...q,options:shuffle(q.options)}))),index:0,answers:[]}; write(key,session); render(); }
+  function score(){ return session.answers.filter(a=>a.correct).length; }
+
+  function mapFor(q){
+    if(!q.mapCode) return '';
+    const center=window.MAP_CENTERS[q.mapCode];
+    const paths=Object.entries(window.MAP_PATHS).map(([code,path])=>`<path class="country ${code===q.mapCode?'target':''}" d="${path}"></path>`).join('');
+    const locator=center?`<circle class="locator" cx="${center[0]}" cy="${center[1]}" r="12"></circle>`:'';
+    return `<div class="map-wrap"><svg class="world-map" viewBox="0 0 1000 500" role="img" aria-label="Mapamundi con un país resaltado">${paths}${locator}</svg><p class="map-key">País marcado</p></div>`;
+  }
+
+  function render(){
+    const q=session.questions[session.index], a=session.answers[session.index];
+    app.innerHTML=`<div class="topline"><span class="badge">${names[q.category]}</span><span>Pregunta <strong>${session.index+1}</strong> de ${total} · <strong>${score()}</strong> puntos</span><button class="quiet" id="pause">Pausar</button></div><div class="progress" role="progressbar" aria-label="Preguntas contestadas" aria-valuemin="0" aria-valuemax="${total}" aria-valuenow="${session.answers.length}"><div style="width:${session.answers.length/total*100}%"></div></div><section class="panel"><p class="eyebrow">ETAPA ${Math.floor(session.index/10)+1} DE ${order.length}</p><h1 class="question" id="question" tabindex="-1">${escape(q.text)}</h1>${mapFor(q)}<div class="choices">${q.options.map((o,i)=>`<button id="choice${i}" class="choice ${a?(o===q.answer?'correct':o===a.selected?'wrong':''):''}" ${a?'disabled':''}><span class="letter">${'ABCD'[i]}</span><span>${escape(o)}${a&&o===q.answer?' · Correcta':a&&o===a.selected?' · Tu respuesta':''}</span></button>`).join('')}</div><div id="feedback" aria-live="polite">${a?feedback(q,a):''}</div></section>${notice()}`;
+    q.options.forEach((o,i)=>bind('choice'+i,()=>choose(o))); bind('pause',home); bind('next',next); document.getElementById('question').focus();
+  }
+  function feedback(q,a){ return `<div class="feedback ${a.correct?'':'error'}"><strong>${a.correct?'¡Correcto!':'Esta vez fue otra respuesta.'}</strong><p>${a.correct?'':`La respuesta es <b>${escape(q.answer)}</b>. `}${escape(q.explanation)}</p></div><button class="primary next" id="next">${session.index===total-1?'Ver mi resultado':'Siguiente pregunta'} →</button>`; }
+  function choose(selected){ if(session.answers[session.index])return; const q=session.questions[session.index]; session.answers.push({selected,correct:selected===q.answer}); write(key,session); render(); document.getElementById('next').focus(); }
+  function next(){ if(!session.answers[session.index])return; if(session.index===total-1){finish();return} session.index++; write(key,session); render(); }
+
+  function finish(){
+    const n=score(); let history=read(historyKey,[]); if(!Array.isArray(history))history=[];
+    if(!history.some(r=>r.id===session.id)){ history.unshift({id:session.id,date:new Date().toLocaleDateString('es-MX'),score:n,total}); write(historyKey,history.slice(0,20)); }
+    erase(key);
+    const stats=order.map(c=>({name:names[c],score:session.questions.reduce((s,q,i)=>s+(q.category===c&&session.answers[i].correct?1:0),0)}));
+    const missed=session.questions.map((q,i)=>({q,a:session.answers[i]})).filter(x=>!x.a.correct);
+    app.innerHTML=`<section class="panel"><p class="eyebrow">EXPEDICIÓN COMPLETADA</p><h1 class="question">${n>=54?'¡Tu mapa mental llega muy lejos!':n>=36?'¡Has descubierto mucho!':'Cada intento abre nuevos caminos.'}</h1><div class="bigscore">${n}<span> / ${total}</span></div><p>Acertaste el ${Math.round(n/total*100)}% de las preguntas. Aquí está tu recorrido:</p>${stats.map(s=>`<div class="row"><span>${s.name}</span><strong>${s.score} / 10</strong></div>`).join('')}<p class="muted">${missed.length?'Puedes repasar las respuestas y volver a intentarlo.':'¡Completaste todas las etapas sin errores!'}</p><div class="actions"><button class="primary" id="again">Nueva expedición</button><button class="quiet" id="home">Volver al inicio</button></div>${notice()}</section>${missed.length?`<details class="panel review"><summary>Explorar mis ${missed.length} respuestas para repasar</summary>${missed.map(({q,a})=>`<article><strong>${escape(q.text)}</strong><p>Elegiste: ${escape(a.selected)}<br>Respuesta: <b>${escape(q.answer)}</b></p><p class="muted">${escape(q.explanation)}</p></article>`).join('')}</details>`:''}`;
+    bind('again',start); bind('home',home); window.scrollTo(0,0);
+  }
+  home();
 })();

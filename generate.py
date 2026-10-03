@@ -73,6 +73,17 @@ reason=[
 ('En un mapa con el norte arriba, avanzas hacia abajo. ¿Qué dirección sigues?','Sur',['Norte','Este','Oeste'],'Abajo corresponde al sur en ese mapa.'),
 ('¿Qué ruta une tres estados vecinos de la península?','Yucatán → Campeche → Quintana Roo',['Yucatán → Sonora → Quintana Roo','Campeche → Chihuahua → Yucatán','Quintana Roo → Jalisco → Campeche'],'Yucatán limita con Campeche, y Campeche con Quintana Roo.')]
 for t,a,o,e in reason:add('reto',t,a,o,e)
-assert len(questions)==200,len(questions)
+map_countries=[
+('MEX','México','América'),('CAN','Canadá','América'),('USA','Estados Unidos','América'),('BRA','Brasil','América'),('ARG','Argentina','América'),('CHL','Chile','América'),('COL','Colombia','América'),('PER','Perú','América'),
+('ESP','España','Europa'),('FRA','Francia','Europa'),('ITA','Italia','Europa'),('DEU','Alemania','Europa'),('GBR','Reino Unido','Europa'),('NOR','Noruega','Europa'),('SWE','Suecia','Europa'),('FIN','Finlandia','Europa'),
+('CHN','China','Asia'),('IND','India','Asia'),('JPN','Japón','Asia'),('KOR','Corea del Sur','Asia'),('VNM','Vietnam','Asia'),('THA','Tailandia','Asia'),('SAU','Arabia Saudita','Asia'),('MNG','Mongolia','Asia'),
+('EGY','Egipto','África'),('MAR','Marruecos','África'),('DZA','Argelia','África'),('NGA','Nigeria','África'),('KEN','Kenia','África'),('ETH','Etiopía','África'),('ZAF','Sudáfrica','África'),('MDG','Madagascar','África'),
+('AUS','Australia','Oceanía'),('NZL','Nueva Zelanda','Oceanía'),('IDN','Indonesia','Oceanía'),('PNG','Papúa Nueva Guinea','Oceanía'),('FJI','Fiyi','Oceanía'),('SLB','Islas Salomón','Oceanía'),('VUT','Vanuatu','Oceanía'),('NCL','Nueva Caledonia','Oceanía')]
+all_continents=['América','Europa','Asia','África','Oceanía']
+for code,country,continent in map_countries:
+    add('mapa','¿A qué continente pertenece el país marcado?',continent,[x for x in all_continents if x!=continent][:3],f'El país resaltado es {country} y pertenece a {continent}.')
+    questions[-1]['mapCode']=code
+    questions[-1]['country']=country
+assert len(questions)==240,len(questions)
 for q in questions:assert len(set(q['options']))==4 and q['answer'] in q['options'],q
 (root/'questions.js').write_text('window.QUESTIONS = '+json.dumps(questions,ensure_ascii=False,indent=2)+';\n')
