@@ -16,7 +16,12 @@ def simplify(points,tolerance=1.5):
     return [a,b]
 
 def ring(coords):
-    pts=simplify([xy(p) for p in coords])
+    # GeoJSON rings repeat their first vertex at the end. Remove that duplicate
+    # before Douglas-Peucker; otherwise the baseline has zero length and the
+    # whole state collapses to a single point.
+    raw=[xy(p) for p in coords]
+    if len(raw)>1 and raw[0]==raw[-1]:raw=raw[:-1]
+    pts=simplify(raw)
     return 'M'+'L'.join(f'{round(x)},{round(y)}' for x,y in pts)+'Z' if pts else ''
 
 def path_for(geometry):
